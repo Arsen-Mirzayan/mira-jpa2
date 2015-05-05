@@ -10,7 +10,7 @@ import java.util.Map;
  *
  * @param <T> класс объектов, список которых сортируем
  */
-public class Orders<T> extends LinkedHashMap<SingularAttribute<T, ?>, Boolean> implements Iterable<Map.Entry<SingularAttribute<T, ?>, Boolean>> {
+public class Orders<T> extends LinkedHashMap<SingularAttribute<? super T, ?>, Boolean> implements Iterable<Map.Entry<SingularAttribute<? super T, ?>, Boolean>> {
     /**
      * Создаёт пустой список сортировки
      */
@@ -21,13 +21,13 @@ public class Orders<T> extends LinkedHashMap<SingularAttribute<T, ?>, Boolean> i
     /**
      * Создаёт список сортировки, заполненный указанными свойствами. Все параметры устанавливаются по возрастанию
      */
-    public Orders(SingularAttribute<T, ?>... properties) {
+    public Orders(SingularAttribute<? super T, ?>... properties) {
         asc(properties);
     }
 
 
     @Override
-    public Iterator<Map.Entry<SingularAttribute<T, ?>, Boolean>> iterator() {
+    public Iterator<Map.Entry<SingularAttribute<? super T, ?>, Boolean>> iterator() {
         return entrySet().iterator();
     }
 
@@ -36,8 +36,8 @@ public class Orders<T> extends LinkedHashMap<SingularAttribute<T, ?>, Boolean> i
      *
      * @param properties свойства
      */
-    public void asc(SingularAttribute<T, ?>... properties) {
-        for (SingularAttribute<T, ?> property : properties) {
+    public void asc(SingularAttribute<? super T, ?>... properties) {
+        for (SingularAttribute<? super T, ?> property : properties) {
             put(property, true);
         }
     }
@@ -47,8 +47,8 @@ public class Orders<T> extends LinkedHashMap<SingularAttribute<T, ?>, Boolean> i
      *
      * @param properties свойства
      */
-    public void desc(SingularAttribute<T, ?>... properties) {
-        for (SingularAttribute<T, ?> property : properties) {
+    public void desc(SingularAttribute<? super T, ?>... properties) {
+        for (SingularAttribute<? super T, ?> property : properties) {
             put(property, false);
         }
     }

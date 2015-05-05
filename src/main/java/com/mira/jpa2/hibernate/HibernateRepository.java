@@ -74,7 +74,7 @@ public class HibernateRepository implements Repository {
             @Override
             protected void build() {
                 List<Predicate> predicates = new ArrayList<>(params.size());
-                for (SingularAttribute<T, ?> attribute : params.keySet()) {
+                for (SingularAttribute<? super T, ?> attribute : params.keySet()) {
                     Object value = params.get(attribute);
                     Path<?> path = get(attribute);
                     Predicate predicate = value != null
@@ -152,8 +152,8 @@ public class HibernateRepository implements Repository {
         //параметры сортировки
         Orders<T> orders = pageRequest.getOrders();
         List<Order> orderList = new ArrayList<>();
-        for (Map.Entry<SingularAttribute<T, ?>, Boolean> entry : orders) {
-            SingularAttribute<T, ?> key = entry.getKey();
+        for (Map.Entry<SingularAttribute<? super T, ?>, Boolean> entry : orders) {
+            SingularAttribute<? super T, ?> key = entry.getKey();
             Boolean direction = entry.getValue();
             orderList.add(direction
                     ? builder.asc(root.get(key))
