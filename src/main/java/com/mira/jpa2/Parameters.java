@@ -8,7 +8,7 @@ import java.util.HashMap;
  *
  * @see Repository
  */
-public class Parameters<T> extends HashMap<SingularAttribute<T, ?>, Object> {
+public class Parameters<T> extends HashMap<SingularAttribute<? super T, ?>, Object> {
     /**
      * Создаёт пустую карту параметров
      */
@@ -21,7 +21,7 @@ public class Parameters<T> extends HashMap<SingularAttribute<T, ?>, Object> {
      * @param parameter параметр
      * @param value     значение
      */
-    public <V> Parameters(SingularAttribute<T, V> parameter, V value) {
+    public <V> Parameters(SingularAttribute<? super T, V> parameter, V value) {
         put(parameter, value);
     }
 }
