@@ -40,11 +40,16 @@ public class HibernateRepository implements Repository {
 
     @Override
     public <T> List<T> find(Class<T> cl, QueryBuilder<T> queryBuilder) {
+        return find(cl, queryBuilder, null);
+    }
+
+    @Override
+    public <T> List<T> find(Class<T> cl, QueryBuilder<T> queryBuilder, Integer maxResult) {
         CriteriaBuilder builder = getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(cl);
         Root<T> root = query.from(cl);
         queryBuilder.build(query, root, getCriteriaBuilder());
-        return find(query);
+        return find(query, maxResult);
     }
 
     @Override
@@ -54,7 +59,16 @@ public class HibernateRepository implements Repository {
 
     @Override
     public <T> List<T> find(CriteriaQuery<T> query) {
-        return entityManager.createQuery(query).getResultList();
+        return find(query, null);
+    }
+
+    @Override
+    public <T> List<T> find(CriteriaQuery<T> query, Integer maxResult) {
+        TypedQuery<T> typedQuery = entityManager.createQuery(query);
+        if (maxResult != null && maxResult > 0) {
+            typedQuery.setMaxResults(maxResult);
+        }
+        return typedQuery.getResultList();
     }
 
     @Override

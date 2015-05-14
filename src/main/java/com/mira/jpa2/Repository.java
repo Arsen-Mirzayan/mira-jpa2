@@ -28,6 +28,16 @@ public interface Repository {
     <T> List<T> find(Class<T> cl, QueryBuilder<T> queryBuilder);
 
     /**
+     * Возвращает список объектов указанного типа, подходящих под построенное условие
+     *
+     * @param cl           класс требуемых объектов
+     * @param queryBuilder построитель условия отбора
+     * @param maxResult    максимальное количество результирующих строк
+     * @return список найденных объектов
+     */
+    <T> List<T> find(Class<T> cl, QueryBuilder<T> queryBuilder, Integer maxResult);
+
+    /**
      * Находит элемент по идентификатору
      *
      * @param cl класс требуемого объекта
@@ -40,10 +50,18 @@ public interface Repository {
      * Возвращает список объектов по запросу
      *
      * @param query запрос
-     * @param <T>
      * @return список найденных объектов
      */
     <T> List<T> find(CriteriaQuery<T> query);
+
+    /**
+     * Возвращает список объектов по запросу
+     *
+     * @param query     запрос
+     * @param maxResult максимальное количество результирующих строк
+     * @return список найденных объектов
+     */
+    <T> List<T> find(CriteriaQuery<T> query, Integer maxResult);
 
     /**
      * Возвращает список объектов, походящих под указанные параметры. Условия соединяются через конъюнкцию

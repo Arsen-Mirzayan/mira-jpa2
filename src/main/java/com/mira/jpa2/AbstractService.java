@@ -1,4 +1,5 @@
 package com.mira.jpa2;
+
 import com.mira.utils.collections.CollectionUtils;
 
 import java.util.Arrays;
@@ -169,7 +170,18 @@ public abstract class AbstractService<E> {
      * @return результат
      */
     public List<E> find(QueryBuilder<E> builder) {
-        return process(getRepository().find(getEntityClass(), builder));
+        return find(builder, (Integer) null);
+    }
+
+    /**
+     * Находит список объектов
+     *
+     * @param builder   построитель условия
+     * @param maxResult максимальное количество результирующих строк
+     * @return результат
+     */
+    public List<E> find(QueryBuilder<E> builder, Integer maxResult) {
+        return process(getRepository().find(getEntityClass(), builder, maxResult));
     }
 
     /**
