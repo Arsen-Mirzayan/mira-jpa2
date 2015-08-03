@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Родительский класс для всех сервисов по работе с объектам данных. Содержит основные методы для манипуляции данными
  */
-public abstract class AbstractService<E> {
+public abstract class AbstractService<E, IdClass> {
 
     protected abstract Class<E> getEntityClass();
 
@@ -28,7 +28,7 @@ public abstract class AbstractService<E> {
      * @param id идентификатор
      * @return найденный объект или {@code null}
      */
-    public E findById(Long id) {
+    public E findById(IdClass id) {
         return process(getRepository().find(getEntityClass(), id));
     }
 
