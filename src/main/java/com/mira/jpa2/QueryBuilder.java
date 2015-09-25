@@ -586,6 +586,30 @@ public abstract class QueryBuilder<T> implements CriteriaBuilder {
         return builder.like(x, pattern, escapeChar);
     }
 
+    public Predicate ilike(Expression<String> x, Expression<String> pattern) {
+        return builder.like(lower(x), lower(pattern));
+    }
+
+    public Predicate ilike(Expression<String> x, String pattern) {
+        return builder.like(lower(x), pattern.toLowerCase());
+    }
+
+    public Predicate ilike(Expression<String> x, Expression<String> pattern, Expression<Character> escapeChar) {
+        return builder.like(lower(x), lower(pattern), escapeChar);
+    }
+
+    public Predicate ilike(Expression<String> x, Expression<String> pattern, char escapeChar) {
+        return builder.like(lower(x), lower(pattern), escapeChar);
+    }
+
+    public Predicate ilike(Expression<String> x, String pattern, Expression<Character> escapeChar) {
+        return builder.like(lower(x), pattern.toLowerCase(), escapeChar);
+    }
+
+    public Predicate ilike(Expression<String> x, String pattern, char escapeChar) {
+        return builder.like(lower(x), pattern, escapeChar);
+    }
+
     @Override
     public Predicate notLike(Expression<String> x, Expression<String> pattern) {
         return builder.notLike(x, pattern);
@@ -614,6 +638,36 @@ public abstract class QueryBuilder<T> implements CriteriaBuilder {
     @Override
     public Predicate notLike(Expression<String> x, String pattern, char escapeChar) {
         return builder.notLike(x, pattern, escapeChar);
+    }
+
+
+    public Predicate notIlike(Expression<String> x, Expression<String> pattern) {
+        return builder.notLike(lower(x), lower(pattern));
+    }
+
+
+    public Predicate notIlike(Expression<String> x, String pattern) {
+        return builder.notLike(lower(x), pattern.toLowerCase());
+    }
+
+
+    public Predicate notIlike(Expression<String> x, Expression<String> pattern, Expression<Character> escapeChar) {
+        return builder.notLike(lower(x), lower(pattern), escapeChar);
+    }
+
+
+    public Predicate notIlike(Expression<String> x, Expression<String> pattern, char escapeChar) {
+        return builder.notLike(lower(x), lower(pattern), escapeChar);
+    }
+
+
+    public Predicate notIlike(Expression<String> x, String pattern, Expression<Character> escapeChar) {
+        return builder.notLike(lower(x), pattern.toLowerCase(), escapeChar);
+    }
+
+
+    public Predicate notIlike(Expression<String> x, String pattern, char escapeChar) {
+        return builder.notLike(lower(x), pattern.toLowerCase(), escapeChar);
     }
 
     @Override
