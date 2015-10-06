@@ -10,10 +10,7 @@ import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Строит запрос. Не является потокобезопасным
@@ -203,7 +200,11 @@ public abstract class QueryBuilder<T> implements CriteriaBuilder {
 
     @Override
     public Predicate and(Predicate... restrictions) {
-        return builder.and(restrictions);
+        return builder.and(removeNulls(restrictions));
+    }
+
+    private Predicate[] removeNulls(Predicate[] restrictions) {
+        return (Predicate[]) Arrays.stream(restrictions).filter(x -> x != null).toArray();
     }
 
     @Override
