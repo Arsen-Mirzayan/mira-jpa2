@@ -214,7 +214,7 @@ public abstract class QueryBuilder<T> implements CriteriaBuilder {
 
     @Override
     public Predicate or(Predicate... restrictions) {
-        return builder.or(restrictions);
+        return builder.or(removeNulls(restrictions));
     }
 
     @Override
