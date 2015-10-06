@@ -1,5 +1,8 @@
 package com.mira.jpa2;
 
+import org.hibernate.jpa.criteria.CriteriaBuilderImpl;
+import org.hibernate.jpa.criteria.predicate.CompoundPredicate;
+
 import javax.persistence.Tuple;
 import javax.persistence.criteria.*;
 import javax.persistence.metamodel.MapAttribute;
@@ -195,7 +198,11 @@ public abstract class QueryBuilder<T> implements CriteriaBuilder {
 
     @Override
     public Predicate and(Expression<Boolean> x, Expression<Boolean> y) {
-        return builder.and(x, y);
+        return x != null ? (y != null ? builder.and(x, y) : toPredicate(x)) : toPredicate(y);
+    }
+
+    protected Predicate toPredicate(Expression<Boolean> expression) {
+        return new CompoundPredicate((CriteriaBuilderImpl) builder, Predicate.BooleanOperator.AND, Collections.singletonList(expression));
     }
 
     @Override
@@ -203,13 +210,13 @@ public abstract class QueryBuilder<T> implements CriteriaBuilder {
         return builder.and(removeNulls(restrictions));
     }
 
-    private Predicate[] removeNulls(Predicate[] restrictions) {
-        return (Predicate[]) Arrays.stream(restrictions).filter(x -> x != null).toArray();
+    private <EXPR extends Expression> EXPR[] removeNulls(EXPR[] restrictions) {
+        return (EXPR[]) Arrays.stream(restrictions).filter(x -> x != null).toArray();
     }
 
     @Override
     public Predicate or(Expression<Boolean> x, Expression<Boolean> y) {
-        return builder.or(x, y);
+        return x != null ? (y != null ? builder.or(x, y) : toPredicate(x)) : toPredicate(y);
     }
 
     @Override
