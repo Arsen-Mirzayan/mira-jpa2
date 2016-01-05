@@ -215,6 +215,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
         return process(CollectionUtils.getSingleElement(findAnd(params)));
     }
 
-    public abstract Repository getRepository();
-
+    public Repository getRepository() {
+        return repository;
+    }
 }
