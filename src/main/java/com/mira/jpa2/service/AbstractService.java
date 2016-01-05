@@ -1,6 +1,9 @@
-package com.mira.jpa2;
+package com.mira.jpa2.service;
 
+import com.mira.jpa2.*;
+import com.mira.jpa2.data.AbstractPersistentObject;
 import com.mira.utils.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +11,10 @@ import java.util.List;
 /**
  * Родительский класс для всех сервисов по работе с объектам данных. Содержит основные методы для манипуляции данными
  */
-public abstract class AbstractService<E, IdClass> {
+public abstract class AbstractService<E extends AbstractPersistentObject<IdClass>, IdClass> {
+
+    @Autowired
+    protected Repository repository;
 
     protected abstract Class<E> getEntityClass();
 
