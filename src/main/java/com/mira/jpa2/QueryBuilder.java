@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Строит запрос. Не является потокобезопасным
@@ -210,8 +211,8 @@ public abstract class QueryBuilder<T> implements CriteriaBuilder {
         return builder.and(removeNulls(restrictions));
     }
 
-    private <EXPR extends Expression> EXPR[] removeNulls(EXPR[] restrictions) {
-        return (EXPR[]) Arrays.stream(restrictions).filter(x -> x != null).toArray();
+    private Predicate[] removeNulls(Predicate[] restrictions) {
+        return  Arrays.stream(restrictions).filter(x -> x != null).toArray(Predicate[]::new);
     }
 
     @Override
