@@ -16,7 +16,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
     @Resource
     protected Repository repository;
 
-    protected abstract Class<E> getEntityClass();
+    public abstract Class<E> getEntityClass();
 
     /**
      * Обрабатывает сущность перед тем, как представить её во внешний мир. Например инициализирует нужные свойства.
