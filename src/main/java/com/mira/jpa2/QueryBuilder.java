@@ -1,5 +1,6 @@
 package com.mira.jpa2;
 
+import com.mira.jpa2.hibernate.ContainsFunction;
 import org.hibernate.jpa.criteria.CriteriaBuilderImpl;
 import org.hibernate.jpa.criteria.predicate.CompoundPredicate;
 
@@ -14,7 +15,6 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Строит запрос. Не является потокобезопасным
@@ -212,7 +212,7 @@ public abstract class QueryBuilder<T> implements CriteriaBuilder {
     }
 
     private Predicate[] removeNulls(Predicate[] restrictions) {
-        return  Arrays.stream(restrictions).filter(x -> x != null).toArray(Predicate[]::new);
+        return Arrays.stream(restrictions).filter(x -> x != null).toArray(Predicate[]::new);
     }
 
     @Override
@@ -601,6 +601,10 @@ public abstract class QueryBuilder<T> implements CriteriaBuilder {
 
     public Predicate ilike(Expression<String> x, String pattern) {
         return builder.like(lower(x), pattern.toLowerCase());
+    }
+
+    public Expression<Boolean> contains(Expression<String> field, String value) {
+        return new ContainsFunction((CriteriaBuilderImpl) builder, field, value);
     }
 
     public Predicate ilike(Expression<String> x, Expression<String> pattern, Expression<Character> escapeChar) {
