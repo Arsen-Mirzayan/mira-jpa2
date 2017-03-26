@@ -160,7 +160,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param parameters параметры
    * @return {@code true} если существуют
    */
-  boolean exists(Parameters<E> parameters) {
+  public boolean exists(Parameters<E> parameters) {
     PageRequest<E> pageRequest = new PageRequest<>(0, 1, new Orders<>());
     return getRepository().findAnd(getEntityClass(), pageRequest, parameters).getRecordCount() != 0;
   }
