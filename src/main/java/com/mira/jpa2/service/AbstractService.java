@@ -162,7 +162,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    */
   boolean exists(Parameters<E> parameters) {
     PageRequest<E> pageRequest = new PageRequest<>(0, 1, new Orders<>());
-    return findAnd(parameters, pageRequest).getRecordCount() != 0;
+    return getRepository().findAnd(getEntityClass(), pageRequest, parameters).getRecordCount() != 0;
   }
 
 
