@@ -38,6 +38,17 @@ public interface Repository {
   <T> List<T> find(Class<T> cl, QueryBuilder<T> queryBuilder, Integer maxResult);
 
   /**
+   * Возвращает список объектов указанного типа, подходящих под построенное условие
+   *
+   * @param cl           класс требуемых объектов
+   * @param queryBuilder построитель условия отбора
+   * @param firstResult  начиная с какой строки ищем
+   * @param maxResult    максимальное количество результирующих строк
+   * @return список найденных объектов
+   */
+  <T> List<T> find(Class<T> cl, QueryBuilder<T> queryBuilder, long firstResult, Integer maxResult);
+
+  /**
    * Находит элемент по идентификатору
    *
    * @param cl класс требуемого объекта
@@ -57,11 +68,12 @@ public interface Repository {
   /**
    * Возвращает список объектов по запросу
    *
-   * @param query     запрос
-   * @param maxResult максимальное количество результирующих строк
+   * @param query       запрос
+   * @param firstResult начианя с какой строки ищем
+   * @param maxResult   максимальное количество результирующих строк
    * @return список найденных объектов
    */
-  <T> List<T> find(CriteriaQuery<T> query, Integer maxResult);
+  <T> List<T> find(CriteriaQuery<T> query, long firstResult, Integer maxResult);
 
   /**
    * Возвращает список объектов, походящих под указанные параметры. Условия соединяются через конъюнкцию
@@ -72,6 +84,18 @@ public interface Repository {
    * @return список найденных объектов
    */
   <T> List<T> findAnd(Class<T> cl, Parameters<T> params);
+
+  /**
+   * Возвращает список объектов, походящих под указанные параметры. Условия соединяются через конъюнкцию
+   *
+   * @param cl          класс требуемых объектов
+   * @param params      картра параметров
+   * @param firstResult начиная с какой строки ищем
+   * @param maxResult   максимальное количество возвращаемых строк
+   * @param <T>
+   * @return список найденных объектов
+   */
+  <T> List<T> findAnd(Class<T> cl, Parameters<T> params, long firstResult, Integer maxResult);
 
   /**
    * Создаёт инструмент для создания запроса
