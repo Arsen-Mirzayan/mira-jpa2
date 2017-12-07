@@ -213,7 +213,7 @@ public class HibernateRepository implements Repository {
     typedQuery.setMaxResults((int) pageSize);
     List<T> result = typedQuery.getResultList();
 
-    long count = entityManager.createQuery(countQuery).getSingleResult();
+    long count = pageRequest.isComputeCount() ? entityManager.createQuery(countQuery).getSingleResult() : 0;
     long pageCount = (count != 0) ? (long) Math.ceil(count / (float) pageSize) : 0;
 
 
