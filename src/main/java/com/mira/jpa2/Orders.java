@@ -11,47 +11,49 @@ import java.util.Map;
  * @param <T> класс объектов, список которых сортируем
  */
 public class Orders<T> extends LinkedHashMap<SingularAttribute<? super T, ?>, Boolean> implements Iterable<Map.Entry<SingularAttribute<? super T, ?>, Boolean>> {
-    /**
-     * Создаёт пустой список сортировки
-     */
-    public Orders() {
+  /**
+   * Создаёт пустой список сортировки
+   */
+  public Orders() {
+  }
+
+
+  /**
+   * Создаёт список сортировки, заполненный указанными свойствами. Все параметры устанавливаются по возрастанию
+   */
+  public Orders(SingularAttribute<? super T, ?>... properties) {
+    asc(properties);
+  }
+
+
+  @Override
+  public Iterator<Map.Entry<SingularAttribute<? super T, ?>, Boolean>> iterator() {
+    return entrySet().iterator();
+  }
+
+  /**
+   * Добавляет условия упорядочания по возрастанию по указаным свойствам
+   *
+   * @param properties свойства
+   */
+  public Orders<T> asc(SingularAttribute<? super T, ?>... properties) {
+    for (SingularAttribute<? super T, ?> property : properties) {
+      put(property, true);
     }
+    return this;
+  }
 
-
-    /**
-     * Создаёт список сортировки, заполненный указанными свойствами. Все параметры устанавливаются по возрастанию
-     */
-    public Orders(SingularAttribute<? super T, ?>... properties) {
-        asc(properties);
+  /**
+   * Добавляет условия упорядочания по убыванию по указаным свойствам
+   *
+   * @param properties свойства
+   */
+  public Orders<T> desc(SingularAttribute<? super T, ?>... properties) {
+    for (SingularAttribute<? super T, ?> property : properties) {
+      put(property, false);
     }
-
-
-    @Override
-    public Iterator<Map.Entry<SingularAttribute<? super T, ?>, Boolean>> iterator() {
-        return entrySet().iterator();
-    }
-
-    /**
-     * Добавляет условия упорядочания по возрастанию по указаным свойствам
-     *
-     * @param properties свойства
-     */
-    public void asc(SingularAttribute<? super T, ?>... properties) {
-        for (SingularAttribute<? super T, ?> property : properties) {
-            put(property, true);
-        }
-    }
-
-    /**
-     * Добавляет условия упорядочания по убыванию по указаным свойствам
-     *
-     * @param properties свойства
-     */
-    public void desc(SingularAttribute<? super T, ?>... properties) {
-        for (SingularAttribute<? super T, ?> property : properties) {
-            put(property, false);
-        }
-    }
+    return this;
+  }
 
 
 }
