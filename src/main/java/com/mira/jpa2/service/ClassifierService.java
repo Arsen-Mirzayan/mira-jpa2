@@ -12,6 +12,16 @@ import com.mira.utils.ClassUtils;
  * Родительский сервис для работы с классификаторами
  */
 public abstract class ClassifierService<T extends Classifier> extends DefaultDalService<T> {
+  private boolean useCacheForFindByCode;
+
+  public boolean isUseCacheForFindByCode() {
+    return useCacheForFindByCode;
+  }
+
+  public void setUseCacheForFindByCode(boolean useCacheForFindByCode) {
+    this.useCacheForFindByCode = useCacheForFindByCode;
+  }
+
   /**
    * Находит значение классификатора по коду
    *
@@ -19,7 +29,7 @@ public abstract class ClassifierService<T extends Classifier> extends DefaultDal
    * @return найденный элемент или {@code null}
    */
   public T findByCode(String code) {
-    return findAndSingle(new Parameters<T>(Classifier_.code, code));
+    return findAndSingle(new Parameters<T>(Classifier_.code, code).setCache(useCacheForFindByCode));
   }
 
   /**

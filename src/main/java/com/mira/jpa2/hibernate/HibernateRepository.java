@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import javax.persistence.metamodel.SingularAttribute;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +55,11 @@ public class HibernateRepository implements Repository {
     CriteriaQuery<T> query = builder.createQuery(cl);
     Root<T> root = query.from(cl);
     queryBuilder.build(query, root, getCriteriaBuilder());
-    return find(query, firstResult, maxResult);
+    Map<String, Object> hints = new HashMap<>();
+    if (queryBuilder.isCache()) {
+      hints.put("org.hibernate.cacheable", true);
+    }
+    return find(query, firstResult, maxResult, hints);
   }
 
   @Override
@@ -64,17 +69,20 @@ public class HibernateRepository implements Repository {
 
   @Override
   public <T> List<T> find(CriteriaQuery<T> query) {
-    return find(query, 0, null);
+    return find(query, 0, null, null);
   }
 
   @Override
-  public <T> List<T> find(CriteriaQuery<T> query, long firstResult, Integer maxResult) {
+  public <T> List<T> find(CriteriaQuery<T> query, long firstResult, Integer maxResult, Map<String, Object> hints) {
     TypedQuery<T> typedQuery = entityManager.createQuery(query);
     if (maxResult != null && maxResult > 0) {
       typedQuery.setMaxResults(maxResult);
     }
     if (firstResult > 0) {
       typedQuery.setFirstResult((int) firstResult);
+    }
+    if (hints != null) {
+      hints.forEach(typedQuery::setHint);
     }
     return typedQuery.getResultList();
   }
@@ -109,7 +117,8 @@ public class HibernateRepository implements Repository {
               : isNull(path);
           predicates.add(predicate);
         }
-        where(predicates.toArray(new Predicate[predicates.size()]));
+        where(predicates.toArray(new Predicate[0]));
+        cache = params.isCache();
       }
     };
   }

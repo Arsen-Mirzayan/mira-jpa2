@@ -9,19 +9,36 @@ import java.util.HashMap;
  * @see Repository
  */
 public class Parameters<T> extends HashMap<SingularAttribute<? super T, ?>, Object> {
-    /**
-     * Создаёт пустую карту параметров
-     */
-    public Parameters() {
-    }
+  private boolean cache;
 
-    /**
-     * Создаёт карту параметров и кладёт туда пару (параметр, значение)
-     *
-     * @param parameter параметр
-     * @param value     значение
-     */
-    public <V> Parameters(SingularAttribute<? super T, V> parameter, V value) {
-        put(parameter, value);
-    }
+
+  /**
+   * Создаёт пустую карту параметров
+   */
+  public Parameters() {
+  }
+
+  public boolean isCache() {
+    return cache;
+  }
+
+  /**
+   * Говорит, должен ли быть запрос кешируемый
+   * @param cache {@code true}  если нужно кешировать запрос
+   * @return себя же для цепного выхова
+   */
+  public Parameters<T> setCache(boolean cache) {
+    this.cache = cache;
+    return this;
+  }
+
+  /**
+   * Создаёт карту параметров и кладёт туда пару (параметр, значение)
+   *
+   * @param parameter параметр
+   * @param value     значение
+   */
+  public <V> Parameters(SingularAttribute<? super T, V> parameter, V value) {
+    put(parameter, value);
+  }
 }

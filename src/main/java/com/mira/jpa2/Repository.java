@@ -5,6 +5,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Репозиторий, выполняющий работу с данными
@@ -71,9 +72,10 @@ public interface Repository {
    * @param query       запрос
    * @param firstResult начианя с какой строки ищем
    * @param maxResult   максимальное количество результирующих строк
+   * @param hints       подсказки для запроса
    * @return список найденных объектов
    */
-  <T> List<T> find(CriteriaQuery<T> query, long firstResult, Integer maxResult);
+  <T> List<T> find(CriteriaQuery<T> query, long firstResult, Integer maxResult, Map<String, Object> hints);
 
   /**
    * Возвращает список объектов, походящих под указанные параметры. Условия соединяются через конъюнкцию
