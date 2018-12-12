@@ -1,11 +1,13 @@
 package com.mira.jpa2.hibernate;
 
-import org.hibernate.jpa.criteria.CriteriaBuilderImpl;
-import org.hibernate.jpa.criteria.ParameterRegistry;
-import org.hibernate.jpa.criteria.Renderable;
-import org.hibernate.jpa.criteria.compile.RenderingContext;
-import org.hibernate.jpa.criteria.expression.LiteralExpression;
-import org.hibernate.jpa.criteria.expression.function.BasicFunctionExpression;
+
+import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
+import org.hibernate.query.criteria.internal.ParameterContainer;
+import org.hibernate.query.criteria.internal.ParameterRegistry;
+import org.hibernate.query.criteria.internal.Renderable;
+import org.hibernate.query.criteria.internal.compile.RenderingContext;
+import org.hibernate.query.criteria.internal.expression.LiteralExpression;
+import org.hibernate.query.criteria.internal.expression.function.BasicFunctionExpression;
 
 import javax.persistence.criteria.Expression;
 import java.io.Serializable;
@@ -41,8 +43,8 @@ public class ContainsFunction extends BasicFunctionExpression<Boolean> implement
     }
 
     public void registerParameters(ParameterRegistry registry) {
-        Helper.possibleParameter(getField(), registry);
-        Helper.possibleParameter(getValue(), registry);
+        ParameterContainer.Helper.possibleParameter(getField(), registry);
+        ParameterContainer.Helper.possibleParameter(getValue(), registry);
     }
 
 
