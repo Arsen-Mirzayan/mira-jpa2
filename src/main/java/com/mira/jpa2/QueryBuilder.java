@@ -1,8 +1,9 @@
 package com.mira.jpa2;
 
 import com.mira.jpa2.hibernate.ContainsFunction;
-import org.hibernate.jpa.criteria.CriteriaBuilderImpl;
-import org.hibernate.jpa.criteria.predicate.CompoundPredicate;
+import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
+import org.hibernate.query.criteria.internal.predicate.CompoundPredicate;
+
 
 import javax.persistence.Tuple;
 import javax.persistence.criteria.*;
