@@ -1,7 +1,7 @@
 package com.mira.jpa2.hibernate;
 
 import com.mira.jpa2.*;
-import org.hibernate.jpa.HibernateEntityManager;
+import org.hibernate.engine.spi.SessionImplementor;
 
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class HibernateRepository implements Repository {
 
   @PersistenceContext
-  protected HibernateEntityManager entityManager;
+  protected SessionImplementor entityManager;
 
   @Override
   public <T> List<T> findAll(Class<T> cl) {
@@ -211,6 +211,7 @@ public class HibernateRepository implements Repository {
    * Выполняет запрос с постраничным извлечением данных
    *
    * @param query       запрос
+   * @param countQuery  запрос на количество элементов
    * @param pageRequest запрос на постраничное извлечение данных
    * @param <T>         тип извлекаемых данных
    * @return страницу

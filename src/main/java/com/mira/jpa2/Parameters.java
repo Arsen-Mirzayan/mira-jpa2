@@ -24,6 +24,7 @@ public class Parameters<T> extends HashMap<SingularAttribute<? super T, ?>, Obje
 
   /**
    * Говорит, должен ли быть запрос кешируемый
+   *
    * @param cache {@code true}  если нужно кешировать запрос
    * @return себя же для цепного выхова
    */
@@ -37,6 +38,7 @@ public class Parameters<T> extends HashMap<SingularAttribute<? super T, ?>, Obje
    *
    * @param parameter параметр
    * @param value     значение
+   * @param <V>       класс значения
    */
   public <V> Parameters(SingularAttribute<? super T, V> parameter, V value) {
     put(parameter, value);

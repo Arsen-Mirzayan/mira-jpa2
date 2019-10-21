@@ -2,35 +2,16 @@ package com.mira.jpa2.service;
 
 import com.mira.jpa2.PageRequest;
 import com.mira.jpa2.PageResponse;
-import com.mira.jpa2.Parameters;
-import com.mira.jpa2.QueryBuilder;
 import com.mira.jpa2.data.Classifier;
-import com.mira.jpa2.data.Classifier_;
-import com.mira.utils.ClassUtils;
 
-/**
- * Родительский сервис для работы с классификаторами
- */
-public abstract class ClassifierService<T extends Classifier> extends DefaultDalService<T> {
-  private boolean useCacheForFindByCode;
-
-  public boolean isUseCacheForFindByCode() {
-    return useCacheForFindByCode;
-  }
-
-  public void setUseCacheForFindByCode(boolean useCacheForFindByCode) {
-    this.useCacheForFindByCode = useCacheForFindByCode;
-  }
-
+public interface ClassifierService<T extends Classifier> extends DictionaryService<T> {
   /**
    * Находит значение классификатора по коду
    *
    * @param code код классификатора
    * @return найденный элемент или {@code null}
    */
-  public T findByCode(String code) {
-    return findAndSingle(new Parameters<T>(Classifier_.code, code).setCache(useCacheForFindByCode));
-  }
+  T findByCode(String code);
 
   /**
    * Ищет список, подходящий под указанные код и имя.
@@ -40,16 +21,7 @@ public abstract class ClassifierService<T extends Classifier> extends DefaultDal
    * @param request параметры запроса
    * @return страница ответа
    */
-  public PageResponse<T> search(String code, String name, PageRequest<T> request) {
-
-    return find(new QueryBuilder<T>() {
-      @Override
-      protected void build() {
-        where(and(ilike(get(Classifier_.code), (code != null ? code : "") + "%")
-            , ilike(get(Classifier_.name), (name != null ? name : "") + "%")));
-      }
-    }, request);
-  }
+  PageResponse<T> search(String code, String name, PageRequest<T> request);
 
   /**
    * Находит элемент классификатора по коду, если не находит,то создаёт новый
@@ -58,14 +30,5 @@ public abstract class ClassifierService<T extends Classifier> extends DefaultDal
    * @param name имя
    * @return элемент классификатора
    */
-  public T findOrCreate(String code, String name) {
-    T result = findByCode(code);
-    if (result == null) {
-      result = ClassUtils.newInstance(getEntityClass());
-      result.setCode(code);
-      result.setName(name);
-      save(result);
-    }
-    return result;
-  }
+  T findOrCreate(String code, String name);
 }

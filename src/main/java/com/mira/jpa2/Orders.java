@@ -20,6 +20,8 @@ public class Orders<T> extends LinkedHashMap<SingularAttribute<? super T, ?>, Bo
 
   /**
    * Создаёт список сортировки, заполненный указанными свойствами. Все параметры устанавливаются по возрастанию
+   *
+   * @param properties список свойств, по которым будем упорядочивать
    */
   public Orders(SingularAttribute<? super T, ?>... properties) {
     asc(properties);
@@ -35,6 +37,7 @@ public class Orders<T> extends LinkedHashMap<SingularAttribute<? super T, ?>, Bo
    * Добавляет условия упорядочания по возрастанию по указаным свойствам
    *
    * @param properties свойства
+   * @return себя же для последовательного вызова
    */
   public Orders<T> asc(SingularAttribute<? super T, ?>... properties) {
     for (SingularAttribute<? super T, ?> property : properties) {
@@ -47,6 +50,7 @@ public class Orders<T> extends LinkedHashMap<SingularAttribute<? super T, ?>, Bo
    * Добавляет условия упорядочания по убыванию по указаным свойствам
    *
    * @param properties свойства
+   * @return себя же для последовательного вызова
    */
   public Orders<T> desc(SingularAttribute<? super T, ?>... properties) {
     for (SingularAttribute<? super T, ?> property : properties) {

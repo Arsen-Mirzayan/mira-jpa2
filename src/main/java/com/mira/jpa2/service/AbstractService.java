@@ -2,31 +2,11 @@ package com.mira.jpa2.service;
 
 import com.mira.jpa2.*;
 import com.mira.jpa2.data.AbstractPersistentObject;
-import com.mira.utils.collections.CollectionUtils;
 
-import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.List;
 
-/**
- * Родительский класс для всех сервисов по работе с объектам данных. Содержит основные методы для манипуляции данными
- */
-public abstract class AbstractService<E extends AbstractPersistentObject<IdClass>, IdClass> {
-
-  @Resource
-  protected Repository repository;
-
-  public abstract Class<E> getEntityClass();
-
-  /**
-   * Обрабатывает сущность перед тем, как представить её во внешний мир. Например инициализирует нужные свойства.
-   *
-   * @param entity объект, который нужно обработать. <b>Может быть null</b>
-   * @return переданный объект после инициализации
-   */
-  protected E process(E entity) {
-    return entity;
-  }
+public interface AbstractService<E extends AbstractPersistentObject<IdClass>, IdClass> {
+  Class<E> getEntityClass();
 
   /**
    * Находит треуемый объект по идентификатору
@@ -34,38 +14,28 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param id идентификатор
    * @return найденный объект или {@code null}
    */
-  public E findById(IdClass id) {
-    return process(getRepository().find(getEntityClass(), id));
-  }
+  E findById(IdClass id);
 
   /**
    * Сохраняет указанные объекты
    *
    * @param entities список объектов
    */
-  public void save(E... entities) {
-    save(Arrays.asList(entities));
-  }
+  void save(E... entities);
 
   /**
    * Сохраняет указанные объекты
    *
    * @param entities объекты
    */
-  public void save(Iterable<E> entities) {
-    getRepository().saveAll(entities);
-  }
+  void save(Iterable<E> entities);
 
   /**
    * Находит все объекты данного класса
    *
    * @return список объектов
    */
-  public List<E> findAll() {
-    List<E> result = getRepository().findAll(getEntityClass());
-    process(result);
-    return result;
-  }
+  List<E> findAll();
 
   /**
    * Находит все объекты данного класса и возвращает их постранично
@@ -73,42 +43,21 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param pageRequest запрос
    * @return страница ответа
    */
-  public PageResponse<E> findAll(PageRequest<E> pageRequest) {
-    PageResponse<E> result = getRepository().findAll(getEntityClass(), pageRequest);
-    process(result.getResult());
-    return result;
-  }
-
-  /**
-   * Обрабатывает сущности перед тем, как представить её во внешний мир. Например инициализирует нужные свойства.
-   *
-   * @param entities объект, который нужно обработать. <b>Может быть null</b>
-   * @return переданную коллекцию
-   */
-  protected <T extends Iterable<E>> T process(T entities) {
-    for (E entity : entities) {
-      process(entity);
-    }
-    return entities;
-  }
+  PageResponse<E> findAll(PageRequest<E> pageRequest);
 
   /**
    * Удаляет указанный объект из базы данных
    *
    * @param deleted удаляемый объект
    */
-  public void delete(E... deleted) {
-    delete(Arrays.asList(deleted));
-  }
+  void delete(E... deleted);
 
   /**
    * Удаляет указанный объект из базы данных
    *
    * @param deleted удаляемый объект
    */
-  public void delete(Iterable<E> deleted) {
-    getRepository().deleteAll(deleted);
-  }
+  void delete(Iterable<E> deleted);
 
   /**
    * Находит количество экземпляров класса. подходящих под указанные параметры
@@ -116,9 +65,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param params параметры
    * @return количество элементов данного класса
    */
-  public long count(Parameters<E> params) {
-    return getRepository().count(getEntityClass(), params);
-  }
+  long count(Parameters<E> params);
 
   /**
    * Находит количество экземпляров класса. подходящих под указанные параметры
@@ -126,9 +73,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param builder построитель условия
    * @return количество элементов данного класса
    */
-  public long count(QueryBuilder<E> builder) {
-    return getRepository().count(getEntityClass(), builder);
-  }
+  long count(QueryBuilder<E> builder);
 
   /**
    * Находит список элементов по указанным параметрам. Условия на параметры соединяются условием and
@@ -136,9 +81,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param params параметры
    * @return список найденных объектов
    */
-  public List<E> findAnd(Parameters<E> params) {
-    return process(getRepository().findAnd(getEntityClass(), params));
-  }
+  List<E> findAnd(Parameters<E> params);
 
   /**
    * Находит список элементов по указанным параметрам. Условия на параметры соединяются условием and.
@@ -147,12 +90,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param pageRequest параметры страничного запроса
    * @return страница ответа
    */
-  public PageResponse<E> findAnd(Parameters<E> params, PageRequest<E> pageRequest) {
-    PageResponse<E> response = getRepository().findAnd(getEntityClass(), pageRequest, params);
-    process(response.getResult());
-    return response;
-
-  }
+  PageResponse<E> findAnd(Parameters<E> params, PageRequest<E> pageRequest);
 
   /**
    * Проверяет, существуют ли элементы, подходящие под указанные параметры
@@ -160,26 +98,16 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param parameters параметры
    * @return {@code true} если существуют
    */
-  public boolean exists(Parameters<E> parameters) {
-    PageRequest<E> pageRequest = new PageRequest<>(0, 1, new Orders<>());
-    return getRepository().findAnd(getEntityClass(), pageRequest, parameters).getRecordCount() != 0;
-  }
-
+  boolean exists(Parameters<E> parameters);
 
   /**
    * Находит список элементов для указанной страницы.
    *
+   * @param page     номер страницы, начиная с 0.
+   * @param pageSize размер страницы
    * @return страница ответа
    */
-  public PageResponse<E> findPage(int page, int pageSize) {
-    PageResponse<E> response =
-        getRepository().findAnd(getEntityClass(),
-            new PageRequest<>(page, pageSize, new Orders<E>()),
-            new Parameters<E>());
-    process(response.getResult());
-    return response;
-
-  }
+  PageResponse<E> findPage(int page, int pageSize);
 
   /**
    * Находит список объектов
@@ -187,9 +115,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param builder построитель условия
    * @return результат
    */
-  public List<E> find(QueryBuilder<E> builder) {
-    return find(builder, (Integer) null);
-  }
+  List<E> find(QueryBuilder<E> builder);
 
   /**
    * Находит список объектов
@@ -198,9 +124,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param maxResult максимальное количество результирующих строк
    * @return результат
    */
-  public List<E> find(QueryBuilder<E> builder, Integer maxResult) {
-    return process(getRepository().find(getEntityClass(), builder, maxResult));
-  }
+  List<E> find(QueryBuilder<E> builder, Integer maxResult);
 
   /**
    * Находит список объектов для постраничного поиска
@@ -209,11 +133,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @param pageRequest параметры страничного запроса
    * @return страница ответа
    */
-  public PageResponse<E> find(QueryBuilder<E> builder, PageRequest<E> pageRequest) {
-    PageResponse<E> response = getRepository().find(getEntityClass(), pageRequest, builder);
-    process(response.getResult());
-    return response;
-  }
+  PageResponse<E> find(QueryBuilder<E> builder, PageRequest<E> pageRequest);
 
   /**
    * Возвращает единственный элемент, найденный по указанным параметрам. Если под указанные параметры не подходит, то
@@ -223,11 +143,7 @@ public abstract class AbstractService<E extends AbstractPersistentObject<IdClass
    * @return найденный элемент или {@code null} если ничего не найдено.
    * @throws IllegalArgumentException если найдено более одного элемента
    */
-  public E findAndSingle(Parameters<E> params) {
-    return process(CollectionUtils.getSingleElement(findAnd(params)));
-  }
+  E findAndSingle(Parameters<E> params);
 
-  public Repository getRepository() {
-    return repository;
-  }
+  Repository getRepository();
 }
