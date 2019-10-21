@@ -14,7 +14,9 @@ public interface Repository {
   /**
    * Возвращает список всех объеков указанного класса
    *
-   * @param cl класс требуемых объектов
+   * @param cl  класс требуемых объектов
+   * @param <T> тип объекта
+   * @return список найденных объектов
    */
   <T> List<T> findAll(Class<T> cl);
 
@@ -23,7 +25,7 @@ public interface Repository {
    *
    * @param cl           класс требуемых объектов
    * @param queryBuilder построитель условия отбора
-   * @param <T>
+   * @param <T>          тип объекта
    * @return список найденных объектов
    */
   <T> List<T> find(Class<T> cl, QueryBuilder<T> queryBuilder);
@@ -34,6 +36,7 @@ public interface Repository {
    * @param cl           класс требуемых объектов
    * @param queryBuilder построитель условия отбора
    * @param maxResult    максимальное количество результирующих строк
+   * @param <T>          тип объекта
    * @return список найденных объектов
    */
   <T> List<T> find(Class<T> cl, QueryBuilder<T> queryBuilder, Integer maxResult);
@@ -45,6 +48,7 @@ public interface Repository {
    * @param queryBuilder построитель условия отбора
    * @param firstResult  начиная с какой строки ищем
    * @param maxResult    максимальное количество результирующих строк
+   * @param <T>          тип объекта
    * @return список найденных объектов
    */
   <T> List<T> find(Class<T> cl, QueryBuilder<T> queryBuilder, long firstResult, Integer maxResult);
@@ -52,8 +56,9 @@ public interface Repository {
   /**
    * Находит элемент по идентификатору
    *
-   * @param cl класс требуемого объекта
-   * @param id идентификаторв
+   * @param cl  класс требуемого объекта
+   * @param id  идентификаторв
+   * @param <T> тип объекта
    * @return найденный объект, если есть, или {@code null}
    */
   <T> T find(Class<T> cl, Object id);
@@ -62,6 +67,7 @@ public interface Repository {
    * Возвращает список объектов по запросу
    *
    * @param query запрос
+   * @param <T>   тип объекта
    * @return список найденных объектов
    */
   <T> List<T> find(CriteriaQuery<T> query);
@@ -73,6 +79,7 @@ public interface Repository {
    * @param firstResult начианя с какой строки ищем
    * @param maxResult   максимальное количество результирующих строк
    * @param hints       подсказки для запроса
+   * @param <T>         тип объекта
    * @return список найденных объектов
    */
   <T> List<T> find(CriteriaQuery<T> query, long firstResult, Integer maxResult, Map<String, Object> hints);
@@ -82,7 +89,7 @@ public interface Repository {
    *
    * @param cl     класс требуемых объектов
    * @param params картра параметров
-   * @param <T>
+   * @param <T>    тип объекта
    * @return список найденных объектов
    */
   <T> List<T> findAnd(Class<T> cl, Parameters<T> params);
@@ -94,7 +101,7 @@ public interface Repository {
    * @param params      картра параметров
    * @param firstResult начиная с какой строки ищем
    * @param maxResult   максимальное количество возвращаемых строк
-   * @param <T>
+   * @param <T>         тип объекта
    * @return список найденных объектов
    */
   <T> List<T> findAnd(Class<T> cl, Parameters<T> params, long firstResult, Integer maxResult);
@@ -116,7 +123,9 @@ public interface Repository {
   /**
    * Сохраняет указанный объект
    *
+   * @param <T>    тип объекта
    * @param entity объект на сохранение
+   * @return сохранённый объект
    */
   <T> T save(T entity);
 
@@ -137,7 +146,8 @@ public interface Repository {
   /**
    * Возвращает количество элементов указанного класса, хранящихся в хранилище
    *
-   * @param cl класс
+   * @param cl  класс
+   * @param <T> тип объекта
    * @return количество
    */
   <T> long count(Class<T> cl);
@@ -147,6 +157,7 @@ public interface Repository {
    *
    * @param cl           класс
    * @param queryBuilder условие отбора
+   * @param <T>          тип объекта
    * @return количество
    */
   <T> long count(Class<T> cl, QueryBuilder<T> queryBuilder);
@@ -156,6 +167,7 @@ public interface Repository {
    *
    * @param cl     класс
    * @param params параметры запроса
+   * @param <T>    тип объекта
    * @return количество
    */
   <T> long count(Class<T> cl, Parameters<T> params);
@@ -164,7 +176,9 @@ public interface Repository {
    * Возвращает список всех объеков указанного класса
    *
    * @param cl          класс требуемых объектов
+   * @param <T>         тип объекта
    * @param pageRequest запрос на постраничное извлечение данных
+   * @return постраничный результат запроса
    */
   <T> PageResponse<T> findAll(Class<T> cl, PageRequest<T> pageRequest);
 
@@ -174,7 +188,7 @@ public interface Repository {
    * @param cl           класс требуемых объектов
    * @param queryBuilder построитель условия отбора
    * @param pageRequest  запрос на постраничное извлечение данных
-   * @param <T>
+   * @param <T>          тип объекта
    * @return список найденных объектов
    */
   <T> PageResponse<T> find(Class<T> cl, PageRequest<T> pageRequest, QueryBuilder<T> queryBuilder);
@@ -185,7 +199,7 @@ public interface Repository {
    * @param cl          класс требуемых объектов
    * @param params      картра параметров
    * @param pageRequest запрос на постраничное извлечение данных
-   * @param <T>
+   * @param <T>         тип объекта
    * @return список найденных объектов
    */
   <T> PageResponse<T> findAnd(Class<T> cl, PageRequest<T> pageRequest, Parameters<T> params);
@@ -197,7 +211,7 @@ public interface Repository {
    * Создаёт запрос по заготовке
    *
    * @param criteriaQuery заготовка под запрос
-   * @param <T>
+   * @param <T>           тип объекта
    * @return готовый запрос
    */
   public <T> TypedQuery<T> createQuery(CriteriaQuery<T> criteriaQuery);
