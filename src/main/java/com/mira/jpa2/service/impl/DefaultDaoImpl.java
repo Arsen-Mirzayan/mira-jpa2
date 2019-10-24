@@ -3,7 +3,7 @@ package com.mira.jpa2.service.impl;
 import com.mira.jpa2.*;
 import com.mira.jpa2.data.DefaultPersistentObject;
 import com.mira.jpa2.data.DefaultPersistentObject_;
-import com.mira.jpa2.service.DefaultDalService;
+import com.mira.jpa2.service.DefaultDao;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ import java.util.List;
 /**
  * Родительский сервис для всех сервисов для данных с суррогатным ключом
  */
-public abstract class DefaultDalServiceImpl<E extends DefaultPersistentObject> extends AbstractServiceImpl<E, Long> implements DefaultDalService<E> {
+public abstract class DefaultDaoImpl<E extends DefaultPersistentObject> extends AbstractDaoImpl<E, Long> implements DefaultDao<E> {
 
-  public DefaultDalServiceImpl(Repository repository) {
+  public DefaultDaoImpl(Repository repository) {
     super(repository);
   }
 

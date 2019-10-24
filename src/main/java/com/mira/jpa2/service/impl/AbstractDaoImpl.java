@@ -2,7 +2,7 @@ package com.mira.jpa2.service.impl;
 
 import com.mira.jpa2.*;
 import com.mira.jpa2.data.AbstractPersistentObject;
-import com.mira.jpa2.service.AbstractService;
+import com.mira.jpa2.service.AbstractDao;
 import com.mira.utils.collections.CollectionUtils;
 
 import java.util.Arrays;
@@ -11,11 +11,11 @@ import java.util.List;
 /**
  * Родительский класс для всех сервисов по работе с объектам данных. Содержит основные методы для манипуляции данными
  */
-public abstract class AbstractServiceImpl<E extends AbstractPersistentObject<IdClass>, IdClass> implements AbstractService<E, IdClass> {
+public abstract class AbstractDaoImpl<E extends AbstractPersistentObject<IdClass>, IdClass> implements AbstractDao<E, IdClass> {
 
   protected Repository repository;
 
-  public AbstractServiceImpl(Repository repository) {
+  public AbstractDaoImpl(Repository repository) {
     this.repository = repository;
   }
 

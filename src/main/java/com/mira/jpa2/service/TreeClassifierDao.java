@@ -7,7 +7,7 @@ import com.mira.jpa2.data.TreeClassifier;
 import java.util.Collection;
 import java.util.List;
 
-public interface TreeClassifierService<T extends TreeClassifier<T>> extends ClassifierService<T> {
+public interface TreeClassifierDao<T extends TreeClassifier<T>> extends ClassifierDao<T> {
   /**
    * Находит непосредственные дочерние элементы указанного
    *

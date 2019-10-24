@@ -3,18 +3,18 @@ package com.mira.jpa2.service.impl;
 import com.mira.jpa2.*;
 import com.mira.jpa2.data.Classifier;
 import com.mira.jpa2.data.Classifier_;
-import com.mira.jpa2.service.ClassifierService;
+import com.mira.jpa2.service.ClassifierDao;
 import com.mira.utils.ClassUtils;
 
 /**
  * Родительский сервис для работы с классификаторами
  */
-public abstract class ClassifierServiceImpl<T extends Classifier>
-    extends DictionaryServiceImpl<T>
-    implements ClassifierService<T> {
+public abstract class ClassifierDaoImpl<T extends Classifier>
+    extends DictionaryDaoImpl<T>
+    implements ClassifierDao<T> {
   private boolean useCacheForFindByCode;
 
-  public ClassifierServiceImpl(Repository repository) {
+  public ClassifierDaoImpl(Repository repository) {
     super(repository);
   }
 
