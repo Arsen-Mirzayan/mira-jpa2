@@ -1,4 +1,4 @@
-package com.mira.jpa2.service;
+package com.mira.jpa2.dao;
 
 import com.mira.jpa2.data.DictionaryObject;
 

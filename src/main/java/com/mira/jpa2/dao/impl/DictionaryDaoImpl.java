@@ -1,10 +1,10 @@
-package com.mira.jpa2.service.impl;
+package com.mira.jpa2.dao.impl;
 
 import com.mira.jpa2.Parameters;
 import com.mira.jpa2.Repository;
 import com.mira.jpa2.data.DictionaryObject;
 import com.mira.jpa2.data.DictionaryObject_;
-import com.mira.jpa2.service.DictionaryDao;
+import com.mira.jpa2.dao.DictionaryDao;
 import com.mira.utils.ClassUtils;
 import com.mira.utils.collections.CollectionUtils;
 

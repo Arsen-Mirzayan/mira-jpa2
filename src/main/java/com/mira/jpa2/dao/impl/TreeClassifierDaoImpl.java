@@ -1,10 +1,10 @@
-package com.mira.jpa2.service.impl;
+package com.mira.jpa2.dao.impl;
 
 
 import com.mira.jpa2.*;
 import com.mira.jpa2.data.TreeClassifier;
 import com.mira.jpa2.data.TreeClassifier_;
-import com.mira.jpa2.service.TreeClassifierDao;
+import com.mira.jpa2.dao.TreeClassifierDao;
 
 import java.util.Collection;
 import java.util.HashSet;
