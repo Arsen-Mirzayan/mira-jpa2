@@ -1,9 +1,9 @@
-package com.mira.jpa2.service.impl;
+package com.mira.jpa2.dao.impl;
 
 import com.mira.jpa2.*;
 import com.mira.jpa2.data.Classifier;
 import com.mira.jpa2.data.Classifier_;
-import com.mira.jpa2.service.ClassifierDao;
+import com.mira.jpa2.dao.ClassifierDao;
 import com.mira.utils.ClassUtils;
 
 /**

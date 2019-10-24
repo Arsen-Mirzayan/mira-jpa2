@@ -1,9 +1,9 @@
-package com.mira.jpa2.service.impl;
+package com.mira.jpa2.dao.impl;
 
 import com.mira.jpa2.*;
 import com.mira.jpa2.data.DefaultPersistentObject;
 import com.mira.jpa2.data.DefaultPersistentObject_;
-import com.mira.jpa2.service.DefaultDao;
+import com.mira.jpa2.dao.DefaultDao;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
-package com.mira.jpa2.service.impl;
+package com.mira.jpa2.dao.impl;
 
 import com.mira.jpa2.*;
 import com.mira.jpa2.data.AbstractPersistentObject;
-import com.mira.jpa2.service.AbstractDao;
+import com.mira.jpa2.dao.AbstractDao;
 import com.mira.utils.collections.CollectionUtils;
 
 import java.util.Arrays;
