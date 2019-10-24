@@ -4,7 +4,7 @@ import com.mira.jpa2.Parameters;
 import com.mira.jpa2.Repository;
 import com.mira.jpa2.data.DictionaryObject;
 import com.mira.jpa2.data.DictionaryObject_;
-import com.mira.jpa2.service.DictionaryService;
+import com.mira.jpa2.service.DictionaryDao;
 import com.mira.utils.ClassUtils;
 import com.mira.utils.collections.CollectionUtils;
 
@@ -14,11 +14,11 @@ import java.util.List;
 /**
  * Сервис для работы со словарями
  */
-public abstract class DictionaryServiceImpl<T extends DictionaryObject>
-    extends DefaultDalServiceImpl<T>
-    implements DictionaryService<T> {
+public abstract class DictionaryDaoImpl<T extends DictionaryObject>
+    extends DefaultDaoImpl<T>
+    implements DictionaryDao<T> {
 
-  public DictionaryServiceImpl(Repository repository) {
+  public DictionaryDaoImpl(Repository repository) {
     super(repository);
   }
 

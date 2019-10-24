@@ -4,7 +4,7 @@ import com.mira.jpa2.data.DictionaryObject;
 
 import java.util.List;
 
-public interface DictionaryService<E extends DictionaryObject> extends DefaultDalService<E>  {
+public interface DictionaryDao<E extends DictionaryObject> extends DefaultDao<E> {
   /**
    * Находит все элементы словаря с указанным именем
    *

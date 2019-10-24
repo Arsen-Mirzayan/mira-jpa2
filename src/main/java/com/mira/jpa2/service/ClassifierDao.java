@@ -4,7 +4,7 @@ import com.mira.jpa2.PageRequest;
 import com.mira.jpa2.PageResponse;
 import com.mira.jpa2.data.Classifier;
 
-public interface ClassifierService<T extends Classifier> extends DictionaryService<T> {
+public interface ClassifierDao<T extends Classifier> extends DictionaryDao<T> {
   /**
    * Находит значение классификатора по коду
    *

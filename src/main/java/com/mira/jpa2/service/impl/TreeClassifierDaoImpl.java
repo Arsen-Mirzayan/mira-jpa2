@@ -4,7 +4,7 @@ package com.mira.jpa2.service.impl;
 import com.mira.jpa2.*;
 import com.mira.jpa2.data.TreeClassifier;
 import com.mira.jpa2.data.TreeClassifier_;
-import com.mira.jpa2.service.TreeClassifierService;
+import com.mira.jpa2.service.TreeClassifierDao;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,11 +14,11 @@ import java.util.Set;
 /**
  * Родительский сервис для работы с классификаторами
  */
-public abstract class TreeClassifierServiceImpl<T extends TreeClassifier<T>>
-    extends ClassifierServiceImpl<T>
-    implements TreeClassifierService<T> {
+public abstract class TreeClassifierDaoImpl<T extends TreeClassifier<T>>
+    extends ClassifierDaoImpl<T>
+    implements TreeClassifierDao<T> {
 
-  public TreeClassifierServiceImpl(Repository repository) {
+  public TreeClassifierDaoImpl(Repository repository) {
     super(repository);
   }
 

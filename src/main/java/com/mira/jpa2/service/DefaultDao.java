@@ -3,11 +3,10 @@ package com.mira.jpa2.service;
 import com.mira.jpa2.Parameters;
 import com.mira.jpa2.QueryBuilder;
 import com.mira.jpa2.data.DefaultPersistentObject;
-import com.mira.jpa2.service.impl.AbstractServiceImpl;
 
 import java.util.List;
 
-public interface DefaultDalService<E extends DefaultPersistentObject> extends AbstractService<E, Long> {
+public interface DefaultDao<E extends DefaultPersistentObject> extends AbstractDao<E, Long> {
 
   /**
    * Ищет произвольную страницу подходящую под указанные параметры

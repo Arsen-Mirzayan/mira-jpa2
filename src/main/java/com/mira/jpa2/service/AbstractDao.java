@@ -5,7 +5,7 @@ import com.mira.jpa2.data.AbstractPersistentObject;
 
 import java.util.List;
 
-public interface AbstractService<E extends AbstractPersistentObject<IdClass>, IdClass> {
+public interface AbstractDao<E extends AbstractPersistentObject<IdClass>, IdClass> {
   Class<E> getEntityClass();
 
   /**
