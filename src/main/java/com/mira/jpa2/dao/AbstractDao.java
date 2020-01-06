@@ -50,7 +50,7 @@ public interface AbstractDao<E extends AbstractPersistentObject<IdClass>, IdClas
    *
    * @param deleted удаляемый объект
    */
-  void delete(E... deleted);
+  void delete(E deleted);
 
   /**
    * Удаляет указанный объект из базы данных

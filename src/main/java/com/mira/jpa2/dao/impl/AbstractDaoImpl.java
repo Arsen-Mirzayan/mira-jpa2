@@ -1,11 +1,10 @@
 package com.mira.jpa2.dao.impl;
 
 import com.mira.jpa2.*;
-import com.mira.jpa2.data.AbstractPersistentObject;
 import com.mira.jpa2.dao.AbstractDao;
+import com.mira.jpa2.data.AbstractPersistentObject;
 import com.mira.utils.collections.CollectionUtils;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,7 +62,7 @@ public abstract class AbstractDaoImpl<E extends AbstractPersistentObject<IdClass
    * Обрабатывает сущности перед тем, как представить её во внешний мир. Например инициализирует нужные свойства.
    *
    * @param entities объект, который нужно обработать. <b>Может быть null</b>
-   * @param <T> коллекция объектов
+   * @param <T>      коллекция объектов
    * @return переданную коллекцию
    */
   protected <T extends Iterable<E>> T process(T entities) {
@@ -74,8 +73,8 @@ public abstract class AbstractDaoImpl<E extends AbstractPersistentObject<IdClass
   }
 
   @Override
-  public void delete(E... deleted) {
-    delete(Arrays.asList(deleted));
+  public void delete(E deleted) {
+    delete(Collections.singletonList(deleted));
   }
 
   @Override
