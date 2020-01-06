@@ -19,9 +19,9 @@ public interface AbstractDao<E extends AbstractPersistentObject<IdClass>, IdClas
   /**
    * Сохраняет указанные объекты
    *
-   * @param entities список объектов
+   * @param entity список объектов
    */
-  void save(E... entities);
+  void save(E entity);
 
   /**
    * Сохраняет указанные объекты

@@ -6,6 +6,7 @@ import com.mira.jpa2.dao.AbstractDao;
 import com.mira.utils.collections.CollectionUtils;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,8 +36,8 @@ public abstract class AbstractDaoImpl<E extends AbstractPersistentObject<IdClass
   }
 
   @Override
-  public void save(E... entities) {
-    save(Arrays.asList(entities));
+  public void save(E entity) {
+    save(Collections.singletonList(entity));
   }
 
   @Override
