@@ -13,9 +13,7 @@ import javax.persistence.criteria.Expression;
 import java.io.Serializable;
 
 /**
- * Models a SQL <tt>CONTAINS</tt> expression.
- *
- * @author Steve Ebersole
+ * Models a SQL CONTAINS expression.
  */
 public class ContainsFunction extends BasicFunctionExpression<Boolean> implements Serializable {
     private final Expression<String> field;
