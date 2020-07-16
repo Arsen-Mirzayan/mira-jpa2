@@ -27,6 +27,7 @@ public final class PageRequest<T> implements Serializable {
    *
    * @param page     номер страницы
    * @param pageSize размер страниц
+   * @param orders   порядок сортировки
    */
   public PageRequest(long page, long pageSize, Orders<T> orders) {
     this.page = page;
