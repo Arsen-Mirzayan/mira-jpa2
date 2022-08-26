@@ -1,7 +1,6 @@
 package com.mira.jpa2.data;
 
 import javax.persistence.Column;
-import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -9,22 +8,26 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public class DictionaryObject extends DefaultPersistentObject {
-    @Lob
-    @Column(nullable = false)
-    protected String name;
+  /**
+   * Максимально допустимая длина поля name
+   */
+  public static final int NAME_MAX_LENGTH = 2000;
 
-    public DictionaryObject() {
-    }
+  @Column(nullable = false, length = NAME_MAX_LENGTH)
+  protected String name;
 
-    public DictionaryObject(Long id) {
-        super(id);
-    }
+  public DictionaryObject() {
+  }
 
-    public String getName() {
-        return name;
-    }
+  public DictionaryObject(Long id) {
+    super(id);
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }
