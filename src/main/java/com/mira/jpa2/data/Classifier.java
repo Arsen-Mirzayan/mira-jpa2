@@ -5,21 +5,22 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Classifier extends DictionaryObject {
-    @Column(nullable = false)
-    protected String code;
+  public static final int CODE_MAX_LENGTH = 200;
+  @Column(nullable = false, length = CODE_MAX_LENGTH)
+  protected String code;
 
-    public Classifier() {
-    }
+  public Classifier() {
+  }
 
-    public Classifier(Long id) {
-        super(id);
-    }
+  public Classifier(Long id) {
+    super(id);
+  }
 
-    public String getCode() {
-        return code;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+  public void setCode(String code) {
+    this.code = code;
+  }
 }
